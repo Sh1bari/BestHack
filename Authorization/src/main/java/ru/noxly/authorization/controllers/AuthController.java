@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.noxly.authorization.models.models.requests.LoginDtoReq;
 import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
 import ru.noxly.authorization.models.models.responses.JwtTokenDtoRes;
 import ru.noxly.authorization.models.models.responses.RegisterUserDtoRes;
@@ -38,6 +39,21 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<JwtTokenDtoRes> registerUser(@RequestBody @BusValid @Valid RegisterUserDtoReq req) {
         val user = authService.registerUser(req);
+        val response = JwtTokenDtoRes.init()
+                .setAccess(generateAccessToken(user))
+                .setRefresh(generateRefreshToken(user))
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(response);
+    }
+
+    @Operation(summary = "Login")
+    @ApiResponses()
+    @PostMapping("/login")
+    public ResponseEntity<JwtTokenDtoRes> login(@RequestBody @BusValid @Valid LoginDtoReq req) {
+        val user = authService.login(req);
         val response = JwtTokenDtoRes.init()
                 .setAccess(generateAccessToken(user))
                 .setRefresh(generateRefreshToken(user))

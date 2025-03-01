@@ -8,17 +8,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.*;
+import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.noxly.authorization.models.models.dto.UserDto;
-import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
 import ru.noxly.authorization.models.models.requests.ValidateUserReq;
 import ru.noxly.authorization.models.models.responses.RegisterUserDtoRes;
 import ru.noxly.authorization.services.UserService;
-import ru.noxly.validation.validation.annotations.BusValid;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +25,7 @@ import ru.noxly.validation.validation.annotations.BusValid;
 @CrossOrigin
 @SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/internal")
-@Tag(name = "Authorization API", description = "")
+@Tag(name = "Internal API", description = "")
 public class InternalController {
 
     private final UserService userService;

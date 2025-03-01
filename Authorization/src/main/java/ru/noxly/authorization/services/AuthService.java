@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.noxly.authorization.models.entities.User;
 import ru.noxly.authorization.models.entities.UserInfo;
+import ru.noxly.authorization.models.models.requests.LoginDtoReq;
 import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
 import ru.noxly.authorization.repositories.RepoResolver;
 
@@ -33,5 +34,10 @@ public class AuthService {
         return userEntity.toBuilder()
                 .setUserInfo(entityUserInfo)
                 .build();
+    }
+
+    public User login(final LoginDtoReq request) {
+        val user = resolver.getUserRepo().findByMail(request.getMail()).get();
+        return user;
     }
 }
