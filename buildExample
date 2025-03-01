@@ -1,6 +1,8 @@
 docker build -t registry.sh1bari.ru/hack/efs:1.0.0 ./EFS
 docker build -t registry.sh1bari.ru/hack/auth:1.0.0 ./Authorization
+docker build -t registry.sh1bari.ru/hack/fuel:1.0.0 ./FuelSeller
 
 docker push registry.sh1bari.ru/hack/efs:1.0.0
 docker push registry.sh1bari.ru/hack/auth:1.0.0
+docker push registry.sh1bari.ru/hack/fuel:1.0.0
 

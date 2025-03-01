@@ -28,8 +28,8 @@ management:
       show-details: always
 services:
   fuel:
-    url: ${MAIN_SERVER_URL:http://localhost:8082}
-    timeOut: ${MAIN_SERVER_TIMEOUT:3000} #in millis
+    url: ${FUEL_SERVER_URL:http://localhost:8082}
+    timeOut: ${FUEL_SERVER_TIMEOUT:3000} #in millis
   auth:
     url: ${AUTH_SERVER_URL:http://localhost:8080}
     timeOut: ${AUTH_SERVER_TIMEOUT:3000} #in millis
