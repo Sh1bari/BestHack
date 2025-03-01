@@ -1,4 +1,4 @@
-package ru.noxly.efs.webClient.main.models;
+package ru.noxly.efs.webClient.main.models.responses;
 
 import lombok.*;
 import ru.noxly.efs.models.models.dto.FuelDto;
