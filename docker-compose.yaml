@@ -66,6 +66,7 @@ services:
 
 volumes:
   pg-data-auth:
+    driver: local
 
 networks:
   traefik_network:
