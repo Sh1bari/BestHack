@@ -39,9 +39,12 @@ public class Lot {
     private final Double remainingFuel;
 
     @Enumerated(EnumType.STRING)
+    @Column
     private final LotStatus status;
 
+    @Column
     private final Double totalPrice;
 
+    @Column
     private final Double pricePerTon;
 }

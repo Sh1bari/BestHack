@@ -11,7 +11,10 @@ CREATE TABLE lots
     date           TIMESTAMP WITHOUT TIME ZONE,
     oil_depot_id   BIGINT,
     fuel_id        BIGINT,
+    price_per_ton DOUBLE PRECISION,
+    total_price DOUBLE PRECISION,
     volume_of_fuel DOUBLE PRECISION,
+    status VARCHAR(255),
     remaining_fuel DOUBLE PRECISION,
     CONSTRAINT pk_lots PRIMARY KEY (id)
 );

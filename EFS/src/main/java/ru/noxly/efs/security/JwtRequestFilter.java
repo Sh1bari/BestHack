@@ -50,6 +50,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } catch (Exception e) {
                 log.warn("Wrong token");
             }
+        }else {
+            setAnonymousUser();
         }
 
         filterChain.doFilter(request, response);
@@ -57,5 +59,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private List<SimpleGrantedAuthority> mapAuthorities(UserDto user) {
         return user.getRoles().stream().map(o -> new SimpleGrantedAuthority(o.toString())).toList();
+    }
+
+    private void setAnonymousUser() {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
+            UserDetails anonymousUser = new CustomUserDetails(null, authorities);
+            UsernamePasswordAuthenticationToken anonymousAuth =
+                    new UsernamePasswordAuthenticationToken(anonymousUser, null, authorities);
+            SecurityContextHolder.getContext().setAuthentication(anonymousAuth);
+        }
     }
 }
