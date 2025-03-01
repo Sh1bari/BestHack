@@ -6,8 +6,9 @@ WORKDIR /build
 
 # Копирование файлов проекта Maven
 COPY pom.xml pom.xml
-COPY private_key.pem /private_key.pem
-COPY public_key.pem /public_key.pem
+COPY libs libs
+
+RUN mvn install:install-file -Dfile=libs/validation-1.0.0.jar -DgroupId=ru.noxly -DartifactId=validation -Dversion=1.0.0 -Dpackaging=jar
 
 # Скачивание зависимостей и сохранение их в отдельном слое
 RUN mvn dependency:go-offline
@@ -16,7 +17,7 @@ RUN mvn dependency:go-offline
 COPY src src
 
 # Сборка приложения
-RUN mvn clean package -DskipTests=true
+RUN mvn clean verify -DskipTests=true
 
 # Этап 2: Запуск приложения
 FROM mirror.gcr.io/openjdk:17-jdk
@@ -26,8 +27,8 @@ WORKDIR /application
 
 # Копирование JAR-файла приложения из сборочного этапа
 COPY --from=build /build/target/*.jar application.jar
-COPY --from=build /private_key.pem private_key.pem
-COPY --from=build /public_key.pem public_key.pem
+COPY --from=build /build/libs libs
 
 # Запуск приложения
 CMD ["java", "-jar", "application.jar"]
+

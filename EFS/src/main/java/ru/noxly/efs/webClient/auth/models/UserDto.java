@@ -1,4 +1,4 @@
-package ru.noxly.efs.models.models.dto;
+package ru.noxly.efs.webClient.auth.models;
 
 import lombok.*;
 import ru.noxly.efs.models.enums.InviteStatus;

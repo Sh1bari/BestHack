@@ -44,12 +44,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             ValidationException.class
     })
-    public ResponseEntity<ValidationErrorResponse> onValidationExceptions(ValidationException exception) {
+    public ResponseEntity<AppError> onValidationExceptions(ValidationException exception) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(ValidationErrorResponse.builder()
-                        .errors(exception.getErrorMessages())
-                        .build());
+                .body(new AppError(409, "Ошибки бизнес-логики", exception.getErrorMessages()));
     }
 
     @ExceptionHandler({

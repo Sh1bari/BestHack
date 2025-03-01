@@ -14,7 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.noxly.efs.models.enums.FuelType;
+import ru.noxly.efs.models.enums.LotStatus;
+import ru.noxly.efs.models.models.dto.FuelDto;
 import ru.noxly.efs.models.models.dto.LotDto;
+import ru.noxly.efs.models.models.dto.OilDepotDto;
+import ru.noxly.efs.utils.Formatter;
+
+import java.time.OffsetDateTime;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,12 +42,26 @@ public class LotController {
     @GetMapping("/lot/{id}")
     public ResponseEntity<LotDto> getLotById(@PathVariable Long id) {
         val lot = LotDto.init()
-                .setId(1L)
-                .setFuelType(FuelType.AI_92)
-                .setOilDepotName("Main Depot")
-                .setOilDepotRegion("Central")
-                .setRemainingFuel(1000.0)
-                .setPricePerTon(500.0)
+                .setId(1001L)
+                .setDate(OffsetDateTime.now().format(Formatter.formatter))
+                .setOilDepot(
+                        OilDepotDto.init()
+                                .setKsssnb(1L)
+                                .setName("Neftbaza 1")
+                                .setRegion("Москва")
+                                .build()
+                ) // ID нефтебазы
+                .setFuel(
+                        FuelDto.init()
+                                .setKssFuel(1L)
+                                .setFuelType(FuelType.AI_92)
+                                .build()
+                ) // ID топлива
+                .setVolumeOfFuel(10000.0) // Объем топлива
+                .setRemainingFuel(2500.0) // Остаток топлива
+                .setStatus(LotStatus.ACCEPTED) // Статус лота (замените на нужный ENUM)
+                .setTotalPrice(750000.0) // Общая стоимость
+                .setPricePerTon(750.0) // Цена за тонну
                 .build();
         return ResponseEntity
                 .status(HttpStatus.OK)

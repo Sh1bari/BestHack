@@ -4,7 +4,7 @@ server:
   jetty:
     max-http-response-header-size: 64KB
   servlet:
-    context-path: /api/auth
+    context-path: /api
 spring:
   application:
     name: auth-server

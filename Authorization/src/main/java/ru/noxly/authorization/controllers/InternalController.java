@@ -1,4 +1,4 @@
-package ru.noxly.efs.controllers;
+package ru.noxly.authorization.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -7,42 +7,40 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import lombok.val;
+import jakarta.validation.Valid;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.noxly.efs.security.CustomUserDetails;
-import ru.noxly.efs.webClient.auth.AuthClient;
-import ru.noxly.efs.webClient.auth.models.UserDto;
-import ru.noxly.efs.webClient.auth.models.requests.ValidateUserReq;
+import ru.noxly.authorization.models.models.dto.UserDto;
+import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
+import ru.noxly.authorization.models.models.requests.ValidateUserReq;
+import ru.noxly.authorization.models.models.responses.RegisterUserDtoRes;
+import ru.noxly.authorization.services.UserService;
+import ru.noxly.validation.validation.annotations.BusValid;
 
 @RestController
 @RequiredArgsConstructor
 @Validated
 @CrossOrigin
 @SecurityRequirement(name = "bearerAuth")
-@RequestMapping("")
-@Tag(name = "User API", description = "")
-public class UserController {
+@RequestMapping("/internal")
+@Tag(name = "Authorization API", description = "")
+public class InternalController {
 
-    private final AuthClient authClient;
-
-    @Operation(summary = "Register")
+    private final UserService userService;
+    @Operation(summary = "Get user data (secured to services)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = {
                             @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = UserDto.class))
+                                    schema = @Schema(implementation = RegisterUserDtoRes.class))
                     })
     })
-    @Secured("ROLE_USER")
-    @GetMapping("/user/me")
-    public ResponseEntity<UserDto> getSelf(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        val user = customUserDetails.getUser();
+    @PostMapping("/validate-user")
+    public ResponseEntity<UserDto> registerUser(@RequestBody @Valid ValidateUserReq req){
+        val user = userService.validateUser(req.getToken());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(user);

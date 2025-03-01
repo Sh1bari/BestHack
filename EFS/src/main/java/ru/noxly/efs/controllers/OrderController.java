@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import ru.noxly.efs.models.enums.DeliveryType;
 import ru.noxly.efs.models.models.dto.LotDto;
 import ru.noxly.efs.models.models.dto.OrderDto;
+import ru.noxly.efs.utils.Formatter;
 
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
 import java.util.UUID;
+
+import static java.time.OffsetTime.now;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,10 +44,10 @@ public class OrderController {
     public ResponseEntity<OrderDto> getOrderById(@PathVariable Long id){
         val order = OrderDto.init()
                 .setId(1L)
-                .setDate("2025-03-01")
+                .setDate(OffsetDateTime.now().format(Formatter.formatter))
                 .setLotId(500L)
                 .setKsssnb(123456L)
-                .setKsssFuel(654321L)
+                .setKssFuel(654321L)
                 .setVolume(1500.75)
                 .setDeliveryType(DeliveryType.SELF)
                 .setClientId(UUID.randomUUID())

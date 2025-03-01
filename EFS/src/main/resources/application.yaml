@@ -30,3 +30,6 @@ services:
   main:
     url: ${MAIN_SERVER_URL:http://localhost:8081}
     timeOut: ${MAIN_SERVER_TIMEOUT:3000} #in millis
+  auth:
+    url: ${AUTH_SERVER_URL:http://localhost:8080}
+    timeOut: ${AUTH_SERVER_TIMEOUT:3000} #in millis

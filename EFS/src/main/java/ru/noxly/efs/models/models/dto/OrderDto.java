@@ -18,11 +18,11 @@ public class OrderDto {
 
     private final Long lotId;
 
-    private final Long ksssnb;
+    private final Long ksssnb; //айди нефтебазы
 
-    private final Long ksssFuel;
+    private final Long kssFuel; //айди топлива
 
-    private final Double volume;
+    private final Double volume; // количество купленного топлива
 
     private final DeliveryType deliveryType;
 

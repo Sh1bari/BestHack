@@ -15,9 +15,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
+import ru.noxly.authorization.models.models.responses.JwtTokenDtoRes;
 import ru.noxly.authorization.models.models.responses.RegisterUserDtoRes;
 import ru.noxly.authorization.services.AuthService;
 import ru.noxly.validation.validation.annotations.BusValid;
+
+import static ru.noxly.authorization.utils.JwtUtil.generateAccessToken;
+import static ru.noxly.authorization.utils.JwtUtil.generateRefreshToken;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,19 +34,18 @@ public class AuthController {
     private final AuthService authService;
 
     @Operation(summary = "Register")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success",
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = RegisterUserDtoRes.class))
-                    })
-    })
+    @ApiResponses()
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody @BusValid @Valid RegisterUserDtoReq req){
+    public ResponseEntity<JwtTokenDtoRes> registerUser(@RequestBody @BusValid @Valid RegisterUserDtoReq req) {
         val user = authService.registerUser(req);
+        val response = JwtTokenDtoRes.init()
+                .setAccess(generateAccessToken(user))
+                .setRefresh(generateRefreshToken(user))
+                .build();
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(user);
+                .body(response);
     }
 
     /*@Operation(summary = "Login")

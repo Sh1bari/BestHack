@@ -19,11 +19,11 @@ import org.springframework.context.annotation.Configuration;
         ),
         servers = {
                 @Server(
-                        url = "http://localhost:8080/api/auth",
+                        url = "http://localhost:8080/api",
                         description = "Local server"
                 ),
                 @Server(
-                        url = "https://auth.noxly.ru/api/auth",
+                        url = "https://auth.noxly.ru/api",
                         description = "Main server"
                 )
         }

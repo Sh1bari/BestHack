@@ -17,8 +17,6 @@ services:
   efs:
     build:
       context: ./EFS
-    environment:
-    depends_on:
     ports:
       - "8086:8081"
     networks:

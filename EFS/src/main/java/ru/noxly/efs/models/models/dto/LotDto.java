@@ -2,6 +2,7 @@ package ru.noxly.efs.models.models.dto;
 
 import lombok.*;
 import ru.noxly.efs.models.enums.FuelType;
+import ru.noxly.efs.models.enums.LotStatus;
 
 @Getter
 @ToString
@@ -12,13 +13,19 @@ public class LotDto {
 
     private final Long id;
 
-    private final FuelType fuelType;
+    private final String date;
 
-    private final String oilDepotName;
+    private final OilDepotDto oilDepot;
 
-    private final String oilDepotRegion;
+    private final FuelDto fuel;
+
+    private final Double volumeOfFuel;
 
     private final Double remainingFuel;
+
+    private final LotStatus status;
+
+    private final Double totalPrice;
 
     private final Double pricePerTon;
 }
