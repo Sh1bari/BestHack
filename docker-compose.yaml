@@ -21,7 +21,7 @@ services:
       - my-custom-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=Host(`auth.sh1bari.ru`)"
+      - "traefik.http.routers.auth.rule=Host(`auth.noxly.ru`)"
       - "traefik.http.routers.auth.entrypoints=websecure"
       - "traefik.http.routers.auth.tls=true"
       - "traefik.http.routers.auth.tls.certresolver=myresolver"
@@ -40,7 +40,7 @@ services:
       - my-custom-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.efs.rule=Host(`hack.sh1bari.ru`)"
+      - "traefik.http.routers.efs.rule=Host(`hack.noxly.ru`)"
       - "traefik.http.routers.efs.entrypoints=websecure"
       - "traefik.http.routers.efs.tls=true"
       - "traefik.http.routers.efs.tls.certresolver=myresolver"
