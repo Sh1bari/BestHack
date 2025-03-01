@@ -83,5 +83,4 @@ networks:
   traefik_network:
     external: true
   my-custom-network:
-    driver: overlay  # Теперь сеть создается в Swarm
-    attachable: true
+    external: true
