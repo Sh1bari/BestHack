@@ -8,8 +8,7 @@ services:
       placement:
         constraints:
           - "node.labels.region == ru"  # Запускаем только на RU сервере
-    build:
-      context: ./Authorization
+    image: registry.sh1bari.ru/hack/auth:1.0.0
     environment:
       - POSTGRES_ADDRESS=authpostgres
       - POSTGRES_PORT=5432
@@ -35,8 +34,7 @@ services:
       placement:
         constraints:
           - "node.labels.region == ru"  # Запускаем только на RU сервере
-    build:
-      context: ./EFS
+    image: registry.sh1bari.ru/hack/efs:1.0.0
     networks:
       - traefik_network
       - my-custom-network
