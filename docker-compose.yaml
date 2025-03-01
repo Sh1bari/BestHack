@@ -21,11 +21,11 @@ services:
       - my-custom-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=Host(`auth.noxly.ru`)"
-      - "traefik.http.routers.auth.entrypoints=websecure"
-      - "traefik.http.routers.auth.tls=true"
-      - "traefik.http.routers.auth.tls.certresolver=myresolver"
-      - "traefik.http.services.auth.loadbalancer.server.port=8080"
+      - "traefik.http.routers.authHack.rule=Host(`auth.noxly.ru`)"
+      - "traefik.http.routers.authHack.entrypoints=websecure"
+      - "traefik.http.routers.authHack.tls=true"
+      - "traefik.http.routers.authHack.tls.certresolver=myresolver"
+      - "traefik.http.services.authHack.loadbalancer.server.port=8080"
 
   efs:
     deploy:
