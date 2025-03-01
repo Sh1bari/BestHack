@@ -1,0 +1,37 @@
+services:
+  auth:
+    build:
+      context: ./Authorization
+    environment:
+      - POSTGRES_ADDRESS=authpostgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - authpostgres
+    ports:
+      - "8085:8080"
+    networks:
+      - my-custom-network
+
+  authpostgres:
+    image: mirror.gcr.io/postgres:16.4-alpine
+    container_name: authpostgres
+    networks:
+      - my-custom-network
+    restart: always
+    environment:
+      - POSTGRES_DB=auth
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - pg-data-auth:/var/lib/postgresql/data
+
+volumes:
+  pg-data-auth:
+
+networks:
+  my-custom-network:
+    external: true
