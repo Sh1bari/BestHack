@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Authorization" />
+        <module name="FuelSeller" />
         <module name="EFS" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Authorization" options="-parameters" />
       <module name="EFS" options="-parameters" />
+      <module name="FuelSeller" options="-parameters" />
     </option>
   </component>
 </project>

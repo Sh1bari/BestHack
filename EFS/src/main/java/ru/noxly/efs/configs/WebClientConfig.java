@@ -9,17 +9,16 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
 import static java.time.Duration.ofMillis;
-import static ru.noxly.efs.common.Constants.WEB_CLIENT_AUTH_BEAN;
-import static ru.noxly.efs.common.Constants.WEB_CLIENT_MAIN_BEAN;
+import static ru.noxly.efs.common.Constants.*;
 
 @Configuration
 public class WebClientConfig {
 
-    @Value("${services.main.url}")
-    private String mainBaseUrl;
+    @Value("${services.fuel.url}")
+    private String fuelBaseUrl;
 
-    @Value("${services.main.timeOut}")
-    private Integer mainTimeOut;
+    @Value("${services.fuel.timeOut}")
+    private Integer fuelTimeOut;
 
     @Value("${services.auth.url}")
     private String authBaseUrl;
@@ -37,12 +36,12 @@ public class WebClientConfig {
                 .build();
     }
 
-    @Bean(WEB_CLIENT_MAIN_BEAN)
+    @Bean(WEB_CLIENT_FUEL_BEAN)
     public WebClient mainWebClientSocket() {
-        val httpClient = HttpClient.create().responseTimeout(ofMillis(mainTimeOut));
+        val httpClient = HttpClient.create().responseTimeout(ofMillis(fuelTimeOut));
         return WebClient
                 .builder()
-                .baseUrl(mainBaseUrl)
+                .baseUrl(fuelBaseUrl)
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
                 .build();
     }

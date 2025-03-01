@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DatabaseMigrationSettings" lastSelectedDirectory="Authorization/src/main/resources/db/migration" />
+  <component name="DatabaseMigrationSettings" lastSelectedDirectory="FuelSeller/src/main/resources/db/migration" />
   <component name="PersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit name="Default">
+      <persistence-unit name="ru.noxly.fuelseller">
         <packages>
-          <package value="ru.noxly.authorization" />
+          <package value="ru.noxly.fuelseller" />
         </packages>
       </persistence-unit>
     </persistence-units>

@@ -1,0 +1,49 @@
+server:
+  forward-headers-strategy: native
+  port: ${SERVER_PORT:8082}
+  jetty:
+    max-http-response-header-size: 64KB
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: fuel-seller-server
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRES_ADDRESS:localhost}:${POSTGRES_PORT:5435}/${POSTGRES_DB_NAME:fuel-seller}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  jpa:
+    openInView: true
+    show-sql: false
+    generateDdl: false
+    database: postgresql
+    databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+  main:
+    allow-circular-references: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+services:
+  main:
+    url: ${MAIN_SERVER_URL:http://localhost:8081}
+    timeOut: ${MAIN_SERVER_TIMEOUT:3000} #in millis

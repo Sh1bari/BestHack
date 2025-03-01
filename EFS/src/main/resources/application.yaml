@@ -27,8 +27,8 @@ management:
     health:
       show-details: always
 services:
-  main:
-    url: ${MAIN_SERVER_URL:http://localhost:8081}
+  fuel:
+    url: ${MAIN_SERVER_URL:http://localhost:8082}
     timeOut: ${MAIN_SERVER_TIMEOUT:3000} #in millis
   auth:
     url: ${AUTH_SERVER_URL:http://localhost:8080}
