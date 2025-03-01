@@ -1,0 +1,5 @@
+package ru.noxly.efs.models.enums;
+
+public enum Role {
+    ROLE_USER
+}

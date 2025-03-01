@@ -14,6 +14,16 @@ services:
     networks:
       - my-custom-network
 
+  efs:
+    build:
+      context: ./EFS
+    environment:
+    depends_on:
+    ports:
+      - "8086:8081"
+    networks:
+      - my-custom-network
+
   authpostgres:
     image: mirror.gcr.io/postgres:16.4-alpine
     container_name: authpostgres
