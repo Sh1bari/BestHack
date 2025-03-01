@@ -46,7 +46,7 @@ services:
       - "traefik.http.routers.efs.tls=true"
       - "traefik.http.routers.efs.tls.certresolver=myresolver"
       - "traefik.http.services.efs.loadbalancer.server.port=8081"
-      - "traefik.http.routers.authHack.priority=23"
+      - "traefik.http.routers.authHack.priority=25"
 
   authpostgres:
     deploy:
