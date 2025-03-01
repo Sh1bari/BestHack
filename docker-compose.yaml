@@ -1,5 +1,10 @@
 services:
   auth:
+    deploy:
+      placement:
+        constraints:
+          - "node.labels.region == ru"  # Запускаем только на NL сервере
+      replicas: 1
     build:
       context: ./Authorization
     environment:
@@ -9,20 +14,42 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - authpostgres
-    ports:
-      - "8085:8080"
     networks:
+      - traefik_network
       - my-custom-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth.rule=Host(`auth.sh1bari.ru`)"
+      - "traefik.http.routers.auth.entrypoints=websecure"
+      - "traefik.http.routers.auth.tls=true"
+      - "traefik.http.routers.auth.tls.certresolver=myresolver"
+      - "traefik.http.services.auth.loadbalancer.server.port=8080"
 
   efs:
+    deploy:
+      placement:
+        constraints:
+          - "node.labels.region == ru"  # Запускаем только на NL сервере
+      replicas: 1
     build:
       context: ./EFS
-    ports:
-      - "8086:8081"
     networks:
+      - traefik_network
       - my-custom-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.efs.rule=Host(`hack.sh1bari.ru`)"
+      - "traefik.http.routers.efs.entrypoints=websecure"
+      - "traefik.http.routers.efs.tls=true"
+      - "traefik.http.routers.efs.tls.certresolver=myresolver"
+      - "traefik.http.services.efs.loadbalancer.server.port=8081"
 
   authpostgres:
+    deploy:
+      placement:
+        constraints:
+          - "node.labels.region == ru"  # Запускаем только на NL сервере
+      replicas: 1
     image: mirror.gcr.io/postgres:16.4-alpine
     container_name: authpostgres
     networks:
@@ -41,5 +68,7 @@ volumes:
   pg-data-auth:
 
 networks:
+  traefik_network:
+    external: true
   my-custom-network:
     external: true
