@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.noxly.authorization.models.models.requests.LoginDtoReq;
+import ru.noxly.authorization.models.models.requests.RefreshDto;
 import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
 import ru.noxly.authorization.models.models.responses.JwtTokenDtoRes;
 import ru.noxly.authorization.models.models.responses.RegisterUserDtoRes;
@@ -64,38 +65,6 @@ public class AuthController {
                 .body(response);
     }
 
-    /*@Operation(summary = "Login")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success",
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = JwtTokenDtoRes.class))
-                    })
-    })
-    @PostMapping("/login")
-    public ResponseEntity<RegisterUserDtoRes> login(@RequestBody @Valid LoginDto req) {
-        RegisterUserDtoRes res = authService.login(req);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(res);
-    }
-
-    @Operation(summary = "Init user, registration in future")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success",
-                    content = {
-                            @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = JwtTokenDtoRes.class))
-                    })
-    })
-    @PostMapping("/init-user")
-    public ResponseEntity<?> init(@RequestBody @Valid CreateUserDtoReq req) {
-        authService.init(req);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .build();
-    }
-
     @Operation(summary = "Refresh token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
@@ -106,9 +75,14 @@ public class AuthController {
     })
     @PostMapping("/refresh")
     public ResponseEntity<JwtTokenDtoRes> refresh(@RequestBody @Valid RefreshDto req) {
-        JwtTokenDtoRes res = authService.refresh(req);
+        val user = authService.refreshToken(req);
+        val response = JwtTokenDtoRes.init()
+                .setAccess(generateAccessToken(user))
+                .setRefresh(generateRefreshToken(user))
+                .build();
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(res);
-    }*/
+                .body(response);
+    }
 }
