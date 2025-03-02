@@ -56,4 +56,5 @@
 ---
 
 ![Пессимистик лок на лоты](assets/1.png)
-![Пессимистик лок на лоты](https://github.com/Sh1bari/BestHack/blob/master/FuelSeller/src/main/java/ru/noxly/fuelseller/services/OrderService.java)
+<br/>
+![41 строка](https://github.com/Sh1bari/BestHack/blob/master/FuelSeller/src/main/java/ru/noxly/fuelseller/services/OrderService.java)
