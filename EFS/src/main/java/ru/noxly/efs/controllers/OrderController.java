@@ -10,12 +10,18 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.noxly.efs.models.enums.DeliveryType;
 import ru.noxly.efs.models.models.dto.LotDto;
 import ru.noxly.efs.models.models.dto.OrderDto;
+import ru.noxly.efs.security.CustomUserDetails;
 import ru.noxly.efs.utils.Formatter;
+import ru.noxly.efs.webClient.main.FuelClient;
+import ru.noxly.efs.webClient.main.models.requests.CreateOrderDto;
+import ru.noxly.efs.webClient.main.models.requests.CreateOrderDtoReq;
 
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
@@ -32,7 +38,9 @@ import static java.time.OffsetTime.now;
 @Tag(name = "Order API", description = "")
 public class OrderController {
 
-    @Operation(summary = "Get order by id")
+    private final FuelClient fuelClient;
+
+    @Operation(summary = "Create order")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = {
@@ -40,20 +48,13 @@ public class OrderController {
                                     schema = @Schema(implementation = OrderDto.class))
                     })
     })
-    @GetMapping("/order/{id}")
-    public ResponseEntity<OrderDto> getOrderById(@PathVariable Long id){
-        val order = OrderDto.init()
-                .setId(1L)
-                .setDate(OffsetDateTime.now().format(Formatter.formatter))
-                .setLotId(500L)
-                .setKsssnb(123456L)
-                .setKssFuel(654321L)
-                .setVolume(1500.75)
-                .setDeliveryType(DeliveryType.SELF)
-                .setClientId(UUID.randomUUID())
-                .build();
+    @Secured("ROLE_USER")
+    @PostMapping("/orders")
+    public ResponseEntity<OrderDto> createOrder(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                                @RequestBody CreateOrderDtoReq request){
+        val response = fuelClient.createOrder(customUserDetails.getUser(), request);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(order);
+                .body(response);
     }
 }

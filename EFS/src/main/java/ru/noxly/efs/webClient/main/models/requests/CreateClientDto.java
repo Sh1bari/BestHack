@@ -1,7 +1,5 @@
-package ru.noxly.fuelseller.models.models.requests;
+package ru.noxly.efs.webClient.main.models.requests;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.*;
 
 import java.util.UUID;

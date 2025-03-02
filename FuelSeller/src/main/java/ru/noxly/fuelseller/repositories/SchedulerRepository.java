@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.repository.query.Param;
+import ru.noxly.fuelseller.models.entites.Lot;
 import ru.noxly.fuelseller.models.entites.Scheduler;
 import ru.noxly.fuelseller.models.enums.SchedulerEnum;
 import ru.sh1bari.resolver.BaseJpaRepository;
