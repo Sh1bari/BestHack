@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @OpenAPIDefinition(
         info = @Info(
-                title = "Best Hack Auth API"
+                title = "Best Hack EFS API"
         ),
         servers = {
                 @Server(
