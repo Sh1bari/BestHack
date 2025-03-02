@@ -1,4 +1,4 @@
-package ru.noxly.fuelseller.models.models.dto;
+package ru.noxly.fuelseller.models.models.requests;
 
 import lombok.*;
 import ru.noxly.fuelseller.models.enums.DeliveryType;
@@ -10,21 +10,17 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Builder(builderMethodName = "init", setterPrefix = "set", toBuilder = true)
-public class OrderDto {
+public class CreateOrderDto {
 
-    private final Long id;
+    private final Long lotId;
 
-    private final String date;
+    private final Long ksssnb;
 
-    private final LotDto lot;
-
-    private final OilDepotDto oilDepot;
-
-    private final FuelDto fuel;
+    private final Long kssFuel;
 
     private final Double volume;
 
     private final DeliveryType deliveryType;
 
-    private final ClientDto client;
+    private final CreateClientDto client;
 }

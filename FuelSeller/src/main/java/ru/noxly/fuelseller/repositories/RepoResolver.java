@@ -22,8 +22,9 @@ public class RepoResolver {
     private final LotRepository lotRepository;
     private final OilDepotRepository oilDepotRepository;
     private final CsvFileRepository csvFileRepository;
-
     private final SchedulerRepository schedulerRepository;
+    private final ClientRepository clientRepository;
+    private final OrderRepository orderRepository;
 
     @PostConstruct
     private void init() {
@@ -32,6 +33,8 @@ public class RepoResolver {
         resolver.put(OilDepot.class, oilDepotRepository);
         resolver.put(CsvFile.class, csvFileRepository);
         resolver.put(Scheduler.class, schedulerRepository);
+        resolver.put(Client.class, clientRepository);
+        resolver.put(Order.class, orderRepository);
     }
 
     private final Map<Class<?>, JpaRepository<?, ?>> resolver = new HashMap<>();

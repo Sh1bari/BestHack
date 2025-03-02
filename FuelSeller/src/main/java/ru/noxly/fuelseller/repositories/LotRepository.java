@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface LotRepository extends BaseJpaRepository<Lot, Long> {
 
-    @Query("SELECT l FROM Lot l WHERE l.date < :now")
+    @Query("SELECT l FROM Lot l WHERE l.date < :now AND l.status <> 'ACCEPTED'")
     List<Lot> findExpiredLots(@Param("now") OffsetDateTime now);
+
 
 }
