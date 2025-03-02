@@ -25,7 +25,7 @@ public class UserDtoConverter implements Converter<User, UserDto> {
                                 .setMiddleName(source.getUserInfo().getMiddleName())
                                 .setSurname(source.getUserInfo().getSurname())
                                 .setFullName(source.getUserInfo().getFullName())
-                        .build()
+                                .build()
                 )
                 .setRoles(source.getRoles())
                 .setUserStatus(source.getUserStatus())

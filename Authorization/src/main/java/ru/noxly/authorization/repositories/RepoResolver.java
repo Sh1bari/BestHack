@@ -21,15 +21,14 @@ public class RepoResolver {
     //Repositories
     private final UserRepository userRepo;
     private final UserInfoRepository userInfoRepo;
+    private final Map<Class<?>, JpaRepository<?, ?>> resolver = new HashMap<>();
+    private final RepoResolverHelper repoResolverHelper;
 
     @PostConstruct
     private void init() {
         resolver.put(User.class, userRepo);
         resolver.put(UserInfo.class, userInfoRepo);
     }
-
-    private final Map<Class<?>, JpaRepository<?, ?>> resolver = new HashMap<>();
-    private final RepoResolverHelper repoResolverHelper;
 
     public <T, ID> RepositoryWrapper<T, ID> resolve(Class<T> entityClass) {
         return repoResolverHelper.resolve(entityClass, resolver);

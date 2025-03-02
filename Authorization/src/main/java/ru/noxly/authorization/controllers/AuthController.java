@@ -18,7 +18,6 @@ import ru.noxly.authorization.models.models.requests.LoginDtoReq;
 import ru.noxly.authorization.models.models.requests.RefreshDto;
 import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
 import ru.noxly.authorization.models.models.responses.JwtTokenDtoRes;
-import ru.noxly.authorization.models.models.responses.RegisterUserDtoRes;
 import ru.noxly.authorization.services.AuthService;
 import ru.noxly.validation.validation.annotations.BusValid;
 

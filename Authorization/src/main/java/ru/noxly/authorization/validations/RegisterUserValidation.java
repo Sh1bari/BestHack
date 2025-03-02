@@ -13,7 +13,7 @@ public class RegisterUserValidation {
     private final RepoResolver resolver;
 
     public void validate(Object obj) {
-        if (obj instanceof RegisterUserDtoReq){
+        if (obj instanceof RegisterUserDtoReq) {
             validate((RegisterUserDtoReq) obj);
         }
     }

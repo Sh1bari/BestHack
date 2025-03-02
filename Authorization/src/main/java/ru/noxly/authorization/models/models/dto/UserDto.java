@@ -1,13 +1,10 @@
 package ru.noxly.authorization.models.models.dto;
 
-import jakarta.persistence.*;
 import lombok.*;
-import ru.noxly.authorization.models.entities.UserInfo;
 import ru.noxly.authorization.models.enums.InviteStatus;
 import ru.noxly.authorization.models.enums.Role;
 import ru.noxly.authorization.models.enums.UserStatus;
 
-import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
 

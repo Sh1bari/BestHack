@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import ru.noxly.authorization.exceptions.AppError;
 import ru.noxly.authorization.exceptions.GlobalAppException;
-import ru.noxly.validation.exceptions.ValidationErrorResponse;
 import ru.noxly.validation.exceptions.ValidationException;
 
 import java.util.stream.Collectors;

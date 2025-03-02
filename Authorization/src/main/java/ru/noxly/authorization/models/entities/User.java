@@ -8,7 +8,6 @@ import ru.noxly.authorization.models.enums.Role;
 import ru.noxly.authorization.models.enums.UserStatus;
 
 import java.time.OffsetDateTime;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 

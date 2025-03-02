@@ -1,6 +1,7 @@
 package ru.noxly.authorization.models.models.requests;
 
 import lombok.*;
+
 @Getter
 @ToString
 @RequiredArgsConstructor

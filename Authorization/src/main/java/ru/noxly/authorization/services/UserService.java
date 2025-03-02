@@ -1,8 +1,7 @@
 package ru.noxly.authorization.services;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import lombok.*;
+import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import ru.noxly.authorization.exceptions.WrongTokenExc;
@@ -19,7 +18,7 @@ public class UserService {
     private final RepoResolver resolver;
     private final ConversionService conversionService;
 
-    public UserDto validateUser(final String token){
+    public UserDto validateUser(final String token) {
         val claims = JwtUtil.getClaims(token);
         if (!claims.getBody().get("tokenType").toString().equals("access")) {
             throw new WrongTokenExc();

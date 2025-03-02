@@ -14,9 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import static ru.noxly.efs.utils.Formatter.formatter;
 
 public class CsvGenerator {
-
-    private static final int NUM_RECORDS = 50;
-    private static final String CSV_FILE_NAME = "lots_data.csv";
     private static final Random random = new Random();
 
     public static File generateCsvFile(Integer from, Integer to) {

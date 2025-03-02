@@ -29,6 +29,7 @@ import ru.noxly.authorization.services.UserService;
 public class InternalController {
 
     private final UserService userService;
+
     @Operation(summary = "Get user data (secured to services)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
@@ -38,7 +39,7 @@ public class InternalController {
                     })
     })
     @PostMapping("/validate-user")
-    public ResponseEntity<UserDto> registerUser(@RequestBody @Valid ValidateUserReq req){
+    public ResponseEntity<UserDto> registerUser(@RequestBody @Valid ValidateUserReq req) {
         val user = userService.validateUser(req.getToken());
         return ResponseEntity
                 .status(HttpStatus.OK)

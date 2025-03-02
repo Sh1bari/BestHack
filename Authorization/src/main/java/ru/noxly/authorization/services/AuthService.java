@@ -48,7 +48,7 @@ public class AuthService {
 
     public User refreshToken(final RefreshDto request) {
         val claims = getClaims(request.getRefreshToken());
-        if(!claims.getBody().get("tokenType").toString().equals("refresh")){
+        if (!claims.getBody().get("tokenType").toString().equals("refresh")) {
             throw new GeneralException(409, "Wrong token type");
         }
         val user = resolver.resolve(User.class)

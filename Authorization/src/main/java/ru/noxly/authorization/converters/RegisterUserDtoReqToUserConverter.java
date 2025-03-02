@@ -5,14 +5,12 @@ import lombok.val;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.noxly.authorization.models.entities.User;
-import ru.noxly.authorization.models.entities.UserInfo;
 import ru.noxly.authorization.models.enums.InviteStatus;
 import ru.noxly.authorization.models.models.requests.RegisterUserDtoReq;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
 
-import static java.lang.String.format;
 import static ru.noxly.authorization.models.enums.Role.ROLE_USER;
 import static ru.noxly.authorization.models.enums.UserStatus.ACTIVE;
 
