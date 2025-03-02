@@ -30,6 +30,13 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<!--FTP-->
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-ftp</artifactId>
+			<version>5.5.10</version>
+		</dependency>
+
 		<!--AOP-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
