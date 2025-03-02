@@ -3,8 +3,6 @@ package ru.noxly.efs.models.models.dto;
 import lombok.*;
 import ru.noxly.efs.models.enums.DeliveryType;
 
-import java.util.UUID;
-
 @Getter
 @ToString
 @RequiredArgsConstructor
@@ -16,15 +14,13 @@ public class OrderDto {
 
     private final String date;
 
-    private final Long lotId;
+    private final LotDto lot;
 
-    private final Long ksssnb; //айди нефтебазы
+    private final OilDepotDto oilDepot;
 
-    private final Long kssFuel; //айди топлива
+    private final FuelDto fuel;
 
-    private final Double volume; // количество купленного топлива
+    private final Double volume;
 
     private final DeliveryType deliveryType;
-
-    private final UUID clientId;
 }

@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.noxly.fuelseller.exceptions.GeneralException;
@@ -24,6 +27,11 @@ public class OrderService {
     private final RepoResolver resolver;
 
     private final ConversionService conversionService;
+
+    public Page<Order> findAll(Specification<Order> spec, Pageable pageable){
+        val orders = resolver.resolve(Order.class).findAll(spec, pageable);
+        return orders;
+    }
 
     @Transactional
     public Order createOrder(final CreateOrderDto request) {

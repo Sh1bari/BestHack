@@ -10,6 +10,7 @@ import ru.noxly.efs.webClient.main.models.requests.*;
 import ru.noxly.efs.webClient.main.models.responses.FuelListRes;
 import ru.noxly.efs.webClient.main.models.responses.LotPageRes;
 import ru.noxly.efs.webClient.main.models.responses.OilDepotPageRes;
+import ru.noxly.efs.webClient.main.models.responses.OrderPageRes;
 
 @Slf4j
 @Service
@@ -72,6 +73,16 @@ public class FuelClient {
                 uri,
                 body,
                 OrderDto.class);
+        return response;
+    }
+
+    public OrderPageRes getOrders(final GetOrdersDto request) {
+        val uri = "/api/orders/self";
+        val response = fuelWebClient.post(
+                uri,
+                request,
+                OrderPageRes.class);
+
         return response;
     }
 }
