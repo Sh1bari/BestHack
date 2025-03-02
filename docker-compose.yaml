@@ -1,6 +1,81 @@
 version: "3.8"
 
 services:
+  platform:
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.region == ru"
+    image: registry.sh1bari.ru/hack/platform:1.0.0
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=productionv
+    command: [ 'npm', 'run', 'start:platform' ]
+    networks:
+      - traefik_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.platform.rule=Host(`fuel.hack.noxly.ru`)"
+      - "traefik.http.routers.platform.entrypoints=websecure"
+      - "traefik.http.routers.platform.tls=true"
+      - "traefik.http.routers.platform.tls.certresolver=myresolver"
+      - "traefik.http.services.platform.loadbalancer.server.port=3000"
+      - "traefik.http.routers.platform.priority=26"
+      - "traefik.docker.network=traefik_network"
+
+  admin:
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.region == ru"
+    image: registry.sh1bari.ru/hack/admin:1.0.0
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=production
+    command: [ 'npm', 'run', 'start:admin' ]
+    networks:
+      - traefik_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin.rule=Host(`admin.hack.noxly.ru`)"
+      - "traefik.http.routers.admin.entrypoints=websecure"
+      - "traefik.http.routers.admin.tls=true"
+      - "traefik.http.routers.admin.tls.certresolver=myresolver"
+      - "traefik.http.services.admin.loadbalancer.server.port=3001"
+      - "traefik.http.routers.admin.priority=27"
+      - "traefik.docker.network=traefik_network"
+
+  sso:
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - "node.labels.region == ru"
+    image: registry.sh1bari.ru/hack/sso:1.0.0
+    ports:
+      - '3002:3002'
+    environment:
+      - NODE_ENV=production
+    command: [ 'npm', 'run', 'start:sso-ui' ]
+    networks:
+      - traefik_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sso.rule=Host(`ui.auth.noxly.ru`)"
+      - "traefik.http.routers.sso.entrypoints=websecure"
+      - "traefik.http.routers.sso.tls=true"
+      - "traefik.http.routers.sso.tls.certresolver=myresolver"
+      - "traefik.http.services.sso.loadbalancer.server.port=3002"
+      - "traefik.http.routers.sso.priority=28"
+      - "traefik.docker.network=traefik_network"
+
   auth:
     deploy:
       mode: replicated
