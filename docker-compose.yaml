@@ -68,7 +68,7 @@ services:
       - traefik_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sso.rule=Host(`ui.auth.noxly.ru`)"
+      - "traefik.http.routers.sso.rule=Host(`ui.auth.hack.noxly.ru`)"
       - "traefik.http.routers.sso.entrypoints=websecure"
       - "traefik.http.routers.sso.tls=true"
       - "traefik.http.routers.sso.tls.certresolver=myresolver"
