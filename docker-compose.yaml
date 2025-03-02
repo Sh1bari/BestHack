@@ -12,6 +12,8 @@ services:
     ports:
       - '3000:3000'
     environment:
+      - VITE_MAIN_ENDPOINT=https://hack.noxly.ru/api
+      - VITE_AUTH_ENDPOINT=https://auth.noxly.ru/api
       - NODE_ENV=productionv
     command: [ 'npm', 'run', 'start:platform' ]
     networks:
@@ -37,6 +39,8 @@ services:
     ports:
       - '3001:3001'
     environment:
+      - VITE_MAIN_ENDPOINT=https://hack.noxly.ru/api
+      - VITE_AUTH_ENDPOINT=https://auth.noxly.ru/api
       - NODE_ENV=production
     command: [ 'npm', 'run', 'start:admin' ]
     networks:
@@ -62,6 +66,8 @@ services:
     ports:
       - '3002:3002'
     environment:
+      - VITE_MAIN_ENDPOINT=https://hack.noxly.ru/api
+      - VITE_AUTH_ENDPOINT=https://auth.noxly.ru/api
       - NODE_ENV=production
     command: [ 'npm', 'run', 'start:sso-ui' ]
     networks:
