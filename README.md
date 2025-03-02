@@ -57,4 +57,10 @@
 
 ![Пессимистик лок на лоты](assets/1.png)
 <br/>
-![41 строка](https://github.com/Sh1bari/BestHack/blob/master/FuelSeller/src/main/java/ru/noxly/fuelseller/services/OrderService.java)
+![41 строка, кликабельно](https://github.com/Sh1bari/BestHack/blob/master/FuelSeller/src/main/java/ru/noxly/fuelseller/services/OrderService.java)
+
+---
+
+![Пессимистик лок на кроны](assets/2.png)
+<br/>
+![файл, кликабельно](https://github.com/Sh1bari/BestHack/blob/master/FuelSeller/src/main/java/ru/noxly/fuelseller/services/SchedulerService.java)
